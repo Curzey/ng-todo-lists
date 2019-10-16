@@ -1,21 +1,21 @@
 <div class="container">
-  <ul class="reset todo-list">
+  <ul class="reset todo-lists">
     <li
-      class="clicky todo-list__item"
-      *ngFor="let todo of todos"
-      [ngClass]="{ 'todo-list__item--completed': todo.completed }"
-      (click)="updateTodo(todo.toggleCompleted())"
+      class="clicky todo-lists__item"
+      *ngFor="let todoList of _data.todoLists"
+      [ngClass]="{ 'todo-lists__item--completed': todoList.completed }"
+      [routerLink]="todoList.title"
     >
-      {{ todo.title }}
+        {{ todoList.title }}   
     </li>
   </ul>
 
-  <form class="mt-3" (ngSubmit)="addTodo(todoInput.value)" novalidate>
+  <form class="mt-3" (ngSubmit)="addTodoList(todoListInput.value)" novalidate>
     <input
-      #todoInput
-      class="todo-input"
+      #todoListInput
+      class="todo-list-input"
       type="text"
-      placeholder="New todo"
+      placeholder="New todo-list"
       required
     />
   </form>

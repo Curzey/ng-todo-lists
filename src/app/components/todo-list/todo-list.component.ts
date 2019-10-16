@@ -4,8 +4,10 @@ import {
   ElementRef,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { TodoList } from 'src/app/models/TodoList';
 import { Todo } from 'src/app/models/Todo';
 import { immutableSplice } from 'src/utils/array';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -14,29 +16,20 @@ import { immutableSplice } from 'src/utils/array';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoListComponent {
-  @ViewChild('todoInput', { static: false }) todoInput: ElementRef<
+  @ViewChild('todoListInput', { static: false }) todoListInput: ElementRef<
     HTMLInputElement
   >;
-  private todoList: Todo[] = [];
 
-  get todos(): Todo[] {
-    return this.todoList;
-  }
+  constructor(private _data: DataService) { }
 
-  addTodo(title: string): void {
+  
+  addTodoList(title: string): void {
     if (!title) {
       return;
     }
-    this.todoList = [...this.todoList, Todo.create(title)];
-    this.todoInput.nativeElement.value = '';
-  }
+    this._data.todoLists = [...this._data.todoLists, TodoList.create(title)];
+    this.todoListInput.nativeElement.value = '';
 
-  updateTodo(todo: Todo) {
-    this.todoList = immutableSplice(
-      this.todoList,
-      this.todoList.findIndex(t => t.created === todo.created),
-      1,
-      todo
-    );
+    this._data.testLists();    
   }
 }

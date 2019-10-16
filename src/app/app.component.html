@@ -3,7 +3,14 @@
     <h3 class="text-center m-0">
       {{ appTitle }}
     </h3>
+
+    <nav>
+      <ul>
+        <li><a href="#" routerLink="/">Home</a></li>
+      </ul>
+    </nav>
+
   </header>
 
-  <app-todo-list></app-todo-list>
+  <router-outlet></router-outlet>
 </main>
