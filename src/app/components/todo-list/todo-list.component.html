@@ -6,7 +6,13 @@
       [ngClass]="{ 'todo-lists__item--completed': todoList.completed }"
       [routerLink]="todoList.title"
     >
-        {{ todoList.title }}   
+        {{ todoList.title }} <br />
+        <ng-template [ngIf]="todoList.todos.length > 0" [ngIfElse]="none">
+          {{ todoList.todos.length }} todos to do
+        </ng-template>
+        <ng-template #none>
+          0 todos
+        </ng-template>
     </li>
   </ul>
 

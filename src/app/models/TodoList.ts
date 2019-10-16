@@ -8,7 +8,7 @@ export class TodoList {
   protected constructor(
     public readonly title: string,
     public readonly created: Date,
-    public readonly todoLists: Todo[]
+    public readonly todos: Todo[]
   ) {}
 
 }
